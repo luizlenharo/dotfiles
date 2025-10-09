@@ -1,1 +1,0 @@
-/home/llenharo/dotfiles/.zshrc
