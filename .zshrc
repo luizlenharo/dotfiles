@@ -15,7 +15,9 @@ fi
 export ZSH="$HOME/.oh-my-zsh"
 
 # Theme config - fixed syntax
-ZSH_THEME="spaceship"
+ZSH_THEME="catppuccin"
+CATPPUCCIN_FLAVOR="mocha" 
+CATPPUCCIN_SHOW_TIME=true  
 
 # Spaceship settings (fixed syntax)
 SPACESHIP_PROMPT_ASYNC=true
