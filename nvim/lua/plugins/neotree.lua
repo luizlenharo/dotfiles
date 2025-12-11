@@ -195,10 +195,13 @@ return {
             '.git',
             '.python-version',
             '.venv',
+            'Zone.Identifier',
           },
           hide_by_pattern = { -- uses glob style patterns
             --"*.meta",
             --"*/src/*/tsconfig.json",
+            '*:Zone.Identifier',
+            '*.Zone.Identifier',
           },
           always_show = { -- remains visible even if other settings would normally hide it
             --".gitignored",
