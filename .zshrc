@@ -102,3 +102,6 @@ export NVM_DIR="$HOME/.nvm"
 
 # Coder (miniconda - base)
 export PATH="/home/llenharo/miniconda3/bin:$PATH"
+
+# Alias
+alias nv="nvim ."

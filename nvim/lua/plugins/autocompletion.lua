@@ -3,6 +3,9 @@ return { -- Autocompletion
   dependencies = {
     -- Snippet Engine & its associated nvim-cmp source
     {
+      'github/copilot.vim',
+    },
+    {
       'L3MON4D3/LuaSnip',
       build = (function()
         -- Build Step is needed for regex support in snippets.

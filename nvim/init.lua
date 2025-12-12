@@ -34,6 +34,8 @@ require('lazy').setup {
   require 'plugins.smear-cursor',
   require 'plugins.render-markdown',
   require 'plugins.noice',
+  require 'plugins.lazygit',
+  require 'plugins.floaterm',
 }
 
 require('java').setup()
