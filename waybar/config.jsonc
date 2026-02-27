@@ -1,0 +1,80 @@
+// -*- mode: jsonc -*-
+{
+    "layer": "top",
+    "position": "top", 
+    "margin-top": 10,
+    // "margin-bottom": -15,
+
+    "modules-center": [
+        "clock",
+        // "custom/media",
+        "hyprland/workspaces",
+        "pulseaudio",
+        "network",
+        "battery"
+    ],
+
+    "hyprland/workspaces": {
+        "format": "{icon}",
+        "format-icons": {
+            "1": "1",
+            "2": "2",
+            "3": "3",
+            "4": "4",
+            "5": "5",
+            "6": "6",
+            "default": "",
+            "urgent": "*"
+        },
+        "persistent-workspaces": {
+            "*": 5
+        },
+        "on-click": "activate",
+        "on-scroll-down": "hyprctl dispatch workspaces e+1",
+        "on-scroll-up": "hyprctl dispatch workspaces e-1"
+    },
+
+    "battery": {
+        "format": "{icon}",
+        "format-icons": ["", "", "", "", ""],
+        "tooltip-format": "Battery is at {capacity}%"
+    },
+
+    "tray": {
+        // "icon-size": 21,
+        "spacing": 10,
+        // "icons": {
+        //   "blueman": "bluetooth",
+        //   "TelegramDesktop": "$HOME/.local/share/icons/hicolor/16x16/apps/telegram.png"
+        // }
+    },
+
+    "clock": {
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "format-alt": "{:%Y-%m-%d}"
+    },
+
+    "network": {
+        // "interface": "wlp2*", // (Optional) To force the use of this interface
+        "format": "{ifname}",
+        "format-wifi": "{icon}",
+        "tooltip-format": "Connected: {essid}",
+        "format-disconnected": "󰤮",
+        "format-icons": ["󰤟","󰤢","󰤥","󰤨"],
+        "on-click": "kitty --hold nmtui"
+    },
+
+    "pulseaudio": {
+        // "scroll-step": 1, // %, can be a float
+        "format": "{icon}",
+        "format-muted": "",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "default": ["", "", ""]
+        },
+        "on-click": "pavucontrol",
+        "tooltip-format": "Volume: {volume}%"
+    }
+}

@@ -1,0 +1,70 @@
+@import "colors.css";
+
+* {
+    border: none;
+    font-family: "JetBrainsMono Nerd Font";
+    font-size: 16px;
+    font-weight: 500;
+    min-height: 0;
+    padding: 0;
+    margin: 0;
+}
+
+window#waybar {
+    background: transparent;
+}
+
+.modules-center {
+    background: alpha(@surface_container, 0.82);
+    border-radius: 100px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.35);
+    padding: 0px 10px;
+}
+
+#clock,
+#battery,
+#network,
+#pulseaudio,
+#workspaces {
+    color: @on_surface;
+    padding: 4px 10px;
+    border-radius: 100px;
+    transition: background 0.2s ease;
+}
+
+#battery,
+#network,
+#pulseaudio {
+    padding: 4px 13px 4px 7px;
+}
+
+#clock:hover,
+#battery:hover,
+#network:hover,
+#pulseaudio:hover {
+    background: alpha(@on_surface, 0.10);
+}
+
+#workspaces button {
+    color: alpha(@on_surface, 0.45);
+    padding: 4px 8px;
+    border-radius: 100px;
+    background: transparent;
+    transition: all 0.2s ease;
+}
+
+#workspaces button.active {
+    color: @on_surface;
+    background: alpha(@on_surface, 0.18);
+}
+
+#workspaces button:hover {
+    background: alpha(@on_surface, 0.10);
+}
+
+/* ── States ── */
+#battery.charging    { color: @primary; }
+#battery.warning:not(.charging)  { color: @error; }
+#battery.critical:not(.charging) { color: @error; }
+#network.disconnected { color: alpha(@on_surface, 0.35); }
+#pulseaudio.muted     { color: alpha(@on_surface, 0.35); }
