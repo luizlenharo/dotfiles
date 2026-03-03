@@ -1,0 +1,103 @@
+@import                          "colors.rasi"
+
+configuration {
+	modi:                       "drun";
+    show-icons:                 true;
+    display-drun:               "Apps";
+	drun-display-format:        "{name}";
+}
+
+/*
+└── window 
+    └── mainbox
+        ├── inputbar
+        │   ├── prompt
+        │   └── entry
+        └── listview
+            └── elements
+*/
+
+window {
+    transparency: "real";
+    width:                       750px;
+    border-radius:               12px;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+
+mainbox {
+    spacing:                     20px;
+    padding:                     20px;
+    border-radius:               12px;
+    border-color:                transparent;
+    children:                    [ "inputbar", "listview" ];
+}
+
+inputbar {
+    spacing:                     10px;
+    padding:                     15px;
+    border:                      0px;
+    border-radius:               10px;
+    border-color:                @selected;
+    text-color:                  @on-surface;
+    children:                    [ "prompt", "entry" ];
+}
+
+entry {
+    enabled:                     true;
+    background-color:            transparent;
+    text-color:                  @on-surface;
+    cursor:                      text;
+    placeholder:                 "Search";
+    placeholder-color:           inherit;
+}
+
+listview {
+    columns:                     4;
+    lines:                       2;
+    scrollbar:                   false;
+    layout:                      vertical;
+    border:                      0px;
+    border-color:                @selected;
+    background-color:            transparent;
+    text-color:                  @on-surface;
+}
+
+
+element {
+    spacing:                     15px;
+    padding:                     20px 10px;
+    border-radius:               10px;
+    background-color:            transparent;
+    text-color:                  @on-surface;
+    orientation:                 vertical;
+}
+element normal.normal {
+    background-color:            transparent;
+    text-color:                  @on-surface;
+}
+element alternate.normal {
+    background-color:            transparent;
+    text-color:                  @on-surface;
+}
+element selected.normal {
+    background-color:            @on-surface-variant;
+    text-color:                  @foreground;
+}
+element-icon {
+    size:                        48px;
+}
+element-text {
+    background-color:            transparent;
+    vertical-align:              0.5;
+    horizontal-align:            0.5;
+}
+
+error-message {
+    padding:                     15px;
+    border:                      2px solid;
+    border-radius:               10px;
+    border-color:                @selected;
+    background-color:            black / 10%;
+    text-color:                  @foreground;
+}
