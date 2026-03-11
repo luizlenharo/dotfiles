@@ -1,0 +1,46 @@
+// -*- mode: jsonc -*-
+// Control Center panel — spawned by toggle-cc.sh
+{
+    "position": "top",
+    "layer": "overlay",
+    "margin-top": 56,
+
+    "modules-center": [
+        "network#cc",
+        "custom/bluetooth-cc",
+        "pulseaudio#cc",
+        "backlight"
+    ],
+
+    "network#cc": {
+        "format-wifi": "{icon}  {essid}",
+        "format-disconnected": "󰤮  Disconnected",
+        "format-icons": ["󰤟","󰤢","󰤥","󰤨"],
+        "on-click": "kitty --hold nmtui",
+        "tooltip": false
+    },
+
+    "custom/bluetooth-cc": {
+        "exec": "~/.config/waybar/scripts/bluetooth-status.sh",
+        "on-click": "~/.config/waybar/scripts/bluetooth-toggle.sh",
+        "interval": 5,
+        "return-type": "json"
+    },
+
+    "pulseaudio#cc": {
+        "format": "{icon}  {volume}%",
+        "format-muted": "  Muted",
+        "format-icons": { "default": ["", "", ""] },
+        "on-click": "pavucontrol",
+        "scroll-step": 5,
+        "tooltip": false
+    },
+
+    "backlight": {
+        "format": "{icon}  {percent}%",
+        "format-icons": ["", "", "", "", "", "", ""],
+        "on-scroll-up": "brightnessctl set +5%",
+        "on-scroll-down": "brightnessctl set 5%-",
+        "tooltip": false
+    }
+}

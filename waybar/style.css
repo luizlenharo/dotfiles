@@ -68,3 +68,12 @@ window#waybar {
 #battery.critical:not(.charging) { color: @error; }
 #network.disconnected { color: alpha(@on_surface, 0.35); }
 #pulseaudio.muted     { color: alpha(@on_surface, 0.35); }
+
+/* ── Control Center Toggle ── */
+#custom-cc-toggle {
+    color: @on_surface;
+    padding: 4px 10px;
+    border-radius: 100px;
+    transition: background 0.2s ease;
+}
+#custom-cc-toggle:hover { background: alpha(@on_surface, 0.10); }

@@ -1,0 +1,42 @@
+@import "colors.css";
+
+* {
+    border: none;
+    font-family: "JetBrainsMono Nerd Font";
+    font-size: 15px;
+    font-weight: 500;
+    min-height: 0;
+    padding: 0;
+    margin: 0;
+}
+
+window#waybar { background: transparent; }
+
+.modules-center {
+    background: alpha(@surface_container, 0.90);
+    border-radius: 0 0 100px 100px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.40);
+    padding: 4px 10px;
+}
+
+#network,
+#custom-bluetooth-cc,
+#pulseaudio,
+#backlight {
+    color: @on_surface;
+    padding: 6px 14px;
+    border-radius: 100px;
+    transition: background 0.2s ease;
+    min-width: 120px;
+}
+
+#network:hover,
+#custom-bluetooth-cc:hover,
+#pulseaudio:hover,
+#backlight:hover {
+    background: alpha(@on_surface, 0.10);
+}
+
+#custom-bluetooth-cc.off { color: alpha(@on_surface, 0.40); }
+#network.disconnected    { color: alpha(@on_surface, 0.40); }
+#pulseaudio.muted        { color: alpha(@on_surface, 0.40); }
