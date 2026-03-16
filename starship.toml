@@ -1,0 +1,84 @@
+
+format = """
+[┌](#8AB4F8) $conda$directory$git_branch$git_status
+[└─](#8AB4F8) """
+
+# Sem linha em branco entre prompts
+add_newline = true
+
+# --- Diretório ---
+[directory]
+style = "#8AB4F8"
+truncation_length = 3
+truncation_symbol = "…/"
+
+# --- Git ---
+[git_branch]
+symbol = " "
+style = "bold white"
+format = "on [$symbol$branch]($style) "
+
+[git_status]
+style = "dimmed yellow"
+format = '[$all_status$ahead_behind]($style)'
+ahead = "↑"
+behind = "↓"
+modified = "~"
+untracked = "?"
+staged = "+"
+conflicted = "!"
+
+# --- Conda ---
+[conda]
+style = "dimmed white"
+format = "[$environment]($style) "
+ignore_base = true
+
+# --- Módulos extras úteis ---
+
+# Indicador de erro do último comando (sutil)
+[character]
+disabled = true
+
+[status]
+disabled = true
+
+# Rust (já que você trabalha com Rust)
+[rust]
+symbol = " "
+style = "dimmed red"
+format = "[$symbol$version]($style) "
+detect_files = ["Cargo.toml"]
+
+# Python (útil junto com conda)
+[python]
+symbol = " "
+style = "dimmed yellow"
+format = "[$symbol$version]($style) "
+detect_virtualenvs = true
+
+# Node.js (para seus projetos Next.js)
+[nodejs]
+symbol = "󰎙 "
+style = "dimmed green"
+format = "[$symbol$version]($style) "
+detect_files = ["package.json"]
+
+# Go (para seu backend)
+[golang]
+symbol = " "
+style = "dimmed cyan"
+format = "[$symbol$version]($style) "
+
+# Docker (quando em contexto de container)
+[docker_context]
+symbol = "󰡨 "
+style = "dimmed blue"
+format = "[$symbol$context]($style) "
+only_with_files = true
+
+# Package version (para diretórios com package.json/Cargo.toml)
+[package]
+symbol = "󰏗 "
+style = "dimmed white"
+format = "[$symbol$version]($style) "
