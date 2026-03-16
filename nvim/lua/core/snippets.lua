@@ -8,6 +8,7 @@ vim.hl.priorities.semantic_tokens = 95 -- Or any number lower than 100, treesitt
 vim.diagnostic.config {
   virtual_text = {
     prefix = '●',
+    severity = { min = vim.diagnostic.severity.ERROR },
     -- Add a custom format function to show error codes
     format = function(diagnostic)
       local code = diagnostic.code and string.format('[%s]', diagnostic.code) or ''
