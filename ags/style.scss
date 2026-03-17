@@ -65,3 +65,149 @@ window.Bar {
     background-color: rgba(255, 255, 255, 0.2);
   }
 }
+
+// Control Center Popup
+window.ControlCenter {
+  background: transparent;
+  color: $fg-color;
+  font-size: 16px;
+
+  > box.cc-popup {
+    margin: 0px 8px;
+  }
+
+  .cc-container {
+    background-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.4);
+    border-radius: 16px;
+    padding: 16px;
+    min-width: 300px;
+  }
+
+  .cc-tile {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 12px 8px;
+    transition: background-color 200ms ease;
+  }
+
+  .cc-tile-active {
+    background-color: rgba(255, 255, 255, 0.8);
+  }
+
+  .cc-tile-icon {
+    border: none;
+    background: transparent;
+    color: $fg-color;
+    border-radius: 50px;
+    padding: 8px;
+    min-width: 36px;
+    min-height: 36px;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 1);
+    }
+  }
+
+  .cc-tile-label {
+    border: none;
+    background: transparent;
+    color: $fg-color;
+    padding: 4px;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 1);
+      border-radius: 8px;
+    }
+  }
+
+  .cc-tile-title {
+    font-weight: 600;
+    font-size: 13px;
+  }
+
+  .cc-tile-subtitle {
+    font-size: 11px;
+    opacity: 0.7;
+  }
+
+  .cc-slider-row {
+    padding: 8px 12px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+
+    image {
+      min-width: 20px;
+    }
+  }
+
+  .cc-slider-icon {
+    border: none;
+    background: transparent;
+    color: $fg-color;
+    padding: 4px;
+    border-radius: 50px;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.3);
+    }
+  }
+
+  .cc-slider {
+    min-height: 6px;
+
+    trough {
+      border-radius: 3px;
+      background-color: rgba(255, 255, 255, 0.25);
+      min-height: 6px;
+    }
+
+    highlight {
+      border-radius: 3px;
+      background-color: rgba(255, 255, 255, 0.6);
+    }
+
+    slider {
+      background-color: white;
+      border-radius: 50%;
+      min-width: 16px;
+      min-height: 16px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    }
+  }
+
+  .cc-battery {
+    padding: 8px 12px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+  }
+
+  .cc-power-profiles {
+    padding: 0;
+  }
+
+  .cc-profile-btn {
+    border-radius: 12px;
+    padding: 8px 4px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: $fg-color;
+    transition: background-color 200ms ease;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.3);
+    }
+
+    label {
+      font-size: 11px;
+    }
+  }
+
+  .cc-profile-active {
+    background-color: rgba(255, 255, 255, 0.8);
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.9);
+    }
+  }
+}

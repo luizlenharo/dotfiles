@@ -6,6 +6,7 @@ import { Workspaces } from "./modules/workspaces"
 import { Battery } from "./modules/battery"
 import { Wifi } from "./modules/network"
 import { Sound } from "./modules/sound"
+import { ControlCenterButton } from "./modules/control-center"
 
 export default function Bar(gdkmonitor: Gdk.Monitor) {
   const { TOP } = Astal.WindowAnchor
@@ -31,6 +32,7 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
           { Sound() }
           { Wifi() }
           { Battery() }
+          { ControlCenterButton() }
         </box>
       </box>
     </window>
