@@ -36,6 +36,6 @@ hyprctl hyprpaper wallpaper ",$WALLPAPER"
 # Reload Hyprland colors
 hyprctl reload
 
-# Reload Waybar
-killall -9 waybar
-waybar &
+# # Reload Waybar
+# killall -9 waybar
+# waybar &
