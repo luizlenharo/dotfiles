@@ -1,14 +1,14 @@
 
 format = """
-[┌](#8AB4F8) $conda$directory$git_branch$git_status
-[└─](#8AB4F8) """
+[┌](blue) $conda$directory$git_branch$git_status
+[└─](blue) """
 
 # Sem linha em branco entre prompts
 add_newline = true
 
 # --- Diretório ---
 [directory]
-style = "#8AB4F8"
+style = "blue"
 truncation_length = 3
 truncation_symbol = "…/"
 
