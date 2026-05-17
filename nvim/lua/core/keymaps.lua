@@ -82,3 +82,11 @@ end, { desc = 'Go to next diagnostic message' })
 
 vim.keymap.set('n', '<leader>d', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
+
+-- Move current line up/down with Shift+J/K
+vim.keymap.set('n', '<S-j>', ':m .+1<CR>==', { desc = 'Move line down', silent = true })
+vim.keymap.set('n', '<S-k>', ':m .-2<CR>==', { desc = 'Move line up', silent = true })
+
+-- Also works in visual mode (move selected lines)
+vim.keymap.set('v', '<S-j>', ":m '>+1<CR>gv=gv", { desc = 'Move selection down', silent = true })
+vim.keymap.set('v', '<S-k>', ":m '<-2<CR>gv=gv", { desc = 'Move selection up', silent = true })
