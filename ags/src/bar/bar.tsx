@@ -7,6 +7,7 @@ import { Battery } from "./modules/battery"
 import { Wifi } from "./modules/network"
 import { Sound } from "./modules/sound"
 import { ControlCenterButton } from "./modules/control-center"
+import { KeyboardLayout } from "./modules/keyboard"
 
 export default function Bar(gdkmonitor: Gdk.Monitor) {
   const { TOP } = Astal.WindowAnchor
@@ -29,6 +30,7 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
           { Workspaces() }
         </box>
         <box cssClasses={["bar-right"]} hexpand halign={Gtk.Align.END}>
+          { KeyboardLayout() }
           { Sound() }
           { Wifi() }
           { Battery() }

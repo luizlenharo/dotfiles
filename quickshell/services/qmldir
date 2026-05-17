@@ -1,0 +1,6 @@
+singleton AudioService 1.0 AudioService.qml
+singleton BrightnessService 1.0 BrightnessService.qml
+singleton KeyboardService 1.0 KeyboardService.qml
+singleton WifiService 1.0 WifiService.qml
+singleton OsdService 1.0 OsdService.qml
+singleton AppsService 1.0 AppsService.qml
