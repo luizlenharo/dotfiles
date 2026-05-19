@@ -36,6 +36,7 @@ require('lazy').setup {
   require 'plugins.noice',
   require 'plugins.lazygit',
   require 'plugins.floaterm',
+  require 'plugins.claudecode',
 }
 
 -- The line beneath this is called `modeline`. See `:help modeline`
