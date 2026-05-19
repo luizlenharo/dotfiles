@@ -3,15 +3,31 @@ return {
     'folke/noice.nvim',
     event = 'VeryLazy',
     opts = {
-      -- add any options here
+      views = {
+        mini = {
+          position = { row = -2, col = '100%' },
+          align = 'message-right',
+        },
+      },
+      routes = {
+        {
+          filter = { event = 'msg_show', kind = '', find = '%d+L, %d+B' },
+          view = 'mini',
+        },
+        {
+          filter = { event = 'notify' },
+          view = 'mini',
+        },
+      },
     },
     dependencies = {
-      -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
       'MunifTanjim/nui.nvim',
-      -- OPTIONAL:
-      -- `nvim-notify` is only needed, if you want to use the notification view.
-      --   If not available, we use `mini` as the fallback
-      'rcarriga/nvim-notify',
+      {
+        'rcarriga/nvim-notify',
+        opts = {
+          top_down = false,
+        },
+      },
     },
   },
 }
