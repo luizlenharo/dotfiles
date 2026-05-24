@@ -5,6 +5,7 @@ import "bar"
 import "popovers"
 import "osd"
 import "launcher"
+import "lock"
 import "notifications"
 
 ShellRoot {
@@ -17,6 +18,7 @@ ShellRoot {
     Osd { id: osd }
     CalendarPopover { id: calPop }
     PowerPopover { id: powerPop }
+    Lock { id: lock }
 
     // Bars across all monitors share this expansion state.
     property bool barExpanded: false

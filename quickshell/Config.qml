@@ -34,4 +34,11 @@ QtObject {
     readonly property string fontDisplay: "Inter Display, Inter, SF Pro Display, system-ui, sans-serif"
     readonly property string fontText: "Inter, SF Pro Text, system-ui, sans-serif"
     readonly property string fontMono: "JetBrainsMono Nerd Font, monospace"
+
+    // Lock screen wallpaper. ext-session-lock hides the desktop, so the lock
+    // surface paints its own background. Quickshell's URL interceptor
+    // blackholes file:// paths outside the shell config dir, so the
+    // `wallpapers` symlink under the shell dir is used to reach the actual
+    // wallpaper at ~/dotfiles/wallpapers/. Mirror hyprpaper.conf.
+    readonly property url lockWallpaper: Qt.resolvedUrl("wallpapers/mountain.jpg")
 }
