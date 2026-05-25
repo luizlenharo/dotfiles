@@ -21,7 +21,7 @@ ShellRoot {
     Lock { id: lock }
 
     // Bars across all monitors share this expansion state.
-    property bool barExpanded: false
+    property bool barExpanded: true
 
     // Per-monitor bar
     Variants {
