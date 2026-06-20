@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-Quickshell-based Hyprland desktop shell written in QML. Replaces an earlier AGS setup (still present at `dotfiles/ags/`). Visual target is an Apple/Big-Sur-styled glass shell defined by the prototype at `Hyprland Desktop-handoff/hyprland-desktop/project/Hyprland Desktop.html` and the design notes in `uploads/DESIGN-apple.md`.
+Quickshell-based Hyprland desktop shell written in QML. Replaces an earlier AGS setup (still present at `dotfiles/ags/`). Visual target is an Apple/Big-Sur-styled glass shell defined by the prototype at `Hyprland Desktop-handoff/hyprland-desktop/project/Hyprland Desktop.html` and the design notes in `Hyprland Desktop-handoff/hyprland-desktop/project/uploads/DESIGN-apple.md`.
 
 `/home/llenharo/.config/quickshell` mirrors this directory — edit files here; Quickshell hot-reloads on save.
 
@@ -12,14 +12,14 @@ Quickshell-based Hyprland desktop shell written in QML. Replaces an earlier AGS 
 
 - Launch (Hyprland already does this via `exec-once = qs &`): `qs -p ~/dotfiles/quickshell`
 - Force reload: `qs reload`
-- IPC: `qs ipc call <target> <fn>` — handlers live in `shell.qml` (`launcher`, `bar`)
+- IPC: `qs ipc call <target> <fn>` — `launcher`/`bar` handlers live in `shell.qml`; the `lock` handler (`activate`, `status`) lives in `lock/Lock.qml`
 - Triggered by Hyprland keybinds: `Super+Space` → `qs ipc call launcher toggle`; `Super+B` → `qs ipc call bar toggle`
 
 No build, lint, or test tooling. Verification is visual + functional (see "Verification" in `~/.claude/plans/read-the-attached-hyprland-desktop-zip-tidy-karp.md`).
 
 ## Architecture
 
-**Entry / lifetime.** `shell.qml` is a single `ShellRoot` instantiated once. It owns global singleton surfaces (`Launcher`, `NotificationStack`, `Osd`, `CalendarPopover`, `PowerPopover`) and one `TopBar` per monitor via `Variants { model: Quickshell.screens }`. State that must be shared across monitors (e.g. `barExpanded`) lives on `ShellRoot` and is propagated down as a property on each `TopBar`. `IpcHandler { target: ... }` blocks expose CLI-callable functions on global state.
+**Entry / lifetime.** `shell.qml` is a single `ShellRoot` instantiated once. It owns global singleton surfaces (`Launcher`, `NotificationStack`, `Osd`, `CalendarPopover`, `PowerPopover`, `Lock`) and one `TopBar` per monitor via `Variants { model: Quickshell.screens }`. State that must be shared across monitors (e.g. `barExpanded`) lives on `ShellRoot` and is propagated down as a property on each `TopBar`. `IpcHandler { target: ... }` blocks expose CLI-callable functions on global state.
 
 **Design tokens.** `Config.qml` is a `pragma Singleton` (registered via root `qmldir`) holding every color/radius/easing/font constant. Always reference `Config.xxx` rather than hardcoding — the palette is fixed Apple-ish (not Matugen-driven in this pass).
 
@@ -43,6 +43,6 @@ No build, lint, or test tooling. Verification is visual + functional (see "Verif
 - Components consume `parentExpanded` (passed from `TopBar`) rather than reading shell state directly.
 - Module sibling imports use `import ".."` to reach `Config` and `import "../components"` for shared widgets.
 
-## Out of scope (Pass 2, deferred)
+**Lock screen (on probation).** `lock/Lock.qml` implements `ext-session-lock-v1` + PAM via `WlSessionLock` + `PamContext` (PAM `config: "hyprlock"`, reusing that service). One `Lock` instance on `ShellRoot` holds shared state (`locked`, two-stage `stage`, `password`, `pamMessage`); each per-monitor `LockSurface` reads `controller: root`. Engage with `lock.activate()` or `loginctl lock-session` (what `PowerPopover` calls), or `qs ipc call lock activate`; PAM `Success` clears `locked` (there is no `unlock()` invokable). PAM conversation starts lazily on stage 2 so locking doesn't burn a try.
 
-Lock screen via `WlSessionLock` + `PamContext`. Until shipped, `Super+L` keeps invoking `hyprlock`. Don't touch lock work without explicit ask — bugs lock the user out.
+  **Danger zone.** Lock bugs lock the user out. `Super+L` still runs `hyprlock` (the proven path); the Quickshell lock is tested via `Super+Shift+L` and hyprlock is retired only after several clean unlock cycles. Don't touch lock work without explicit ask.

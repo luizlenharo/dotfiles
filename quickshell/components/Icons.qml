@@ -16,7 +16,7 @@ Item {
         switch (glyph) {
         case "speaker":      return "M15.5 8.5a5 5 0 0 1 0 7 M18.5 5.5a9 9 0 0 1 0 13";
         case "speakerMute":  return "M16 9l5 6 M21 9l-5 6";
-        case "wifi":         return "M2 8.5a16 16 0 0 1 20 0 M5 12a12 12 0 0 1 14 0 M8.5 15.5a7 7 0 0 1 7 0";
+        case "wifi":         return "M5 11.5a11 11 0 0 1 14 0 M8 15a6.5 6.5 0 0 1 8 0";
         case "battery":      return "M2 8h17v8H2z M21 10v4";
         case "hamburger":    return "M4 7h16 M4 12h16 M4 17h16";
         case "sun":          return "M12 8a4 4 0 1 0 0 8a4 4 0 1 0 0-8 M12 2v2 M12 20v2 M4.93 4.93l1.41 1.41 M17.66 17.66l1.41 1.41 M2 12h2 M20 12h2 M4.93 19.07l1.41-1.41 M17.66 6.34l1.41-1.41";
@@ -37,7 +37,9 @@ Item {
         case "speaker":     return "M11 5L6 9H3v6h3l5 4V5z";
         case "speakerMute": return "M11 5L6 9H3v6h3l5 4V5z";
         case "battery":     return "M4 10h7v4H4z";
+        case "wifi":        return "M10.6 18a1.4 1.4 0 1 1 2.8 0a1.4 1.4 0 1 1 -2.8 0";
         case "wifiDot":     return "M11 18.5a1 1 0 1 1 2 0a1 1 0 1 1-2 0";
+        case "bolt":        return "M13 2.5L6 13.2h4.2l-1.2 8.3L18 10.4h-4.6l1.4-7.9z";
         default: return "";
         }
     }

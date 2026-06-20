@@ -15,7 +15,8 @@ TbItem {
                 anchors.fill: parent
                 glyph: "wifi"
                 color: Config.onDark
-                opacity: WifiService.connected ? 1 : 0.5
+                strokeWidth: 2.8
+                opacity: WifiService.connected ? 1 : 0.4
             }
         }
     }
@@ -27,7 +28,8 @@ TbItem {
                 anchors.verticalCenter: parent.verticalCenter
                 glyph: "wifi"
                 color: Config.onDark
-                opacity: WifiService.connected ? 1 : 0.5
+                strokeWidth: 2.8
+                opacity: WifiService.connected ? 1 : 0.4
             }
             Text {
                 anchors.verticalCenter: parent.verticalCenter

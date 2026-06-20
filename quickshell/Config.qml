@@ -9,6 +9,7 @@ QtObject {
     readonly property color onDark: "#ffffff"
     readonly property color bodyMuted: "#cccccc"
     readonly property color destructive: Qt.rgba(255/255, 69/255, 58/255, 0.95)
+    readonly property color positive: Qt.rgba(48/255, 209/255, 88/255, 0.95)
 
     readonly property color glassFill: Qt.rgba(28/255, 28/255, 30/255, 0.72)
     readonly property color hairline: Qt.rgba(1, 1, 1, 0.08)

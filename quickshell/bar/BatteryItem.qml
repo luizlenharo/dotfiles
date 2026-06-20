@@ -8,6 +8,9 @@ TbItem {
     readonly property var dev: UPower.displayDevice
     readonly property bool ready: dev !== null && dev !== undefined && dev.isLaptopBattery
     readonly property int pct: ready ? Math.round(dev.percentage * 100) : 0
+    readonly property bool charging: ready && (dev.state === UPowerDeviceState.Charging
+        || dev.state === UPowerDeviceState.PendingCharge
+        || dev.state === UPowerDeviceState.FullyCharged)
     readonly property string mode: {
         const p = PowerProfiles.profile;
         if (p === PowerProfile.PowerSaver)   return "Eco";
@@ -18,37 +21,26 @@ TbItem {
 
     shortForm: Component {
         Item {
-            implicitWidth: 22
+            implicitWidth: 27
             implicitHeight: 25
-            Icons {
-                anchors.fill: parent
-                glyph: "battery"
-                color: Config.onDark
+            BatteryGlyph {
+                anchors.centerIn: parent
+                pct: root.pct
+                charging: root.charging
             }
-            // fill bar inside the battery rect
-            // Rectangle {
-            //     x: 2
-            //     y: 4
-            //     width: Math.max(2, (parent.width - 5) * Math.max(0, root.pct) / 100)
-            //     height: parent.height - 4
-            //     color: Config.onDark
-            //     radius: 1
-            // }
         }
     }
     longForm: Component {
         Row {
             spacing: 8
             Item {
-                width: 22; height: 25
+                width: 27; height: 25
                 anchors.verticalCenter: parent.verticalCenter
-                Icons { anchors.fill: parent; glyph: "battery"; color: Config.onDark }
-                // Rectangle {
-                //     x: 2; y: 4
-                //     width: Math.max(2, (parent.width - 5) * Math.max(0, root.pct) / 100)
-                //     height: parent.height - 4
-                //     color: Config.onDark; radius: 1
-                // }
+                BatteryGlyph {
+                    anchors.centerIn: parent
+                    pct: root.pct
+                    charging: root.charging
+                }
             }
             Text {
                 anchors.verticalCenter: parent.verticalCenter
