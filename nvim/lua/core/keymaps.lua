@@ -8,6 +8,15 @@ vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 vim.keymap.set('i', 'jk', '<Esc>', { noremap = true, silent = true })
 vim.keymap.set('t', 'jk', [[<C-\><C-n>]], { noremap = true, silent = true })
 
+-- Disable the 'jk' terminal mapping inside lazygit so 'j' isn't delayed
+-- waiting for a possible 'k' (nowait sends 'j' to lazygit immediately).
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'lazygit',
+  callback = function(args)
+    vim.keymap.set('t', 'j', 'j', { buffer = args.buf, nowait = true })
+  end,
+})
+
 -- For conciseness
 local opts = { noremap = true, silent = true }
 
