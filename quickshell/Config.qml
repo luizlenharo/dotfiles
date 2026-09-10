@@ -19,6 +19,7 @@ QtObject {
     readonly property color tbItemHover: Qt.rgba(1, 1, 1, 0.06)
     readonly property color wsHasApps: Qt.rgba(1, 1, 1, 0.06)
     readonly property color wsActive: Qt.rgba(1, 1, 1, 0.16)
+    readonly property color wsUrgent: destructive
     readonly property color rowSelected: Qt.rgba(0, 102/255, 204/255, 0.22)
     readonly property color powerHover: Qt.rgba(1, 1, 1, 0.08)
 

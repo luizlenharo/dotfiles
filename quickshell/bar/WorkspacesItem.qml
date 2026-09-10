@@ -31,6 +31,14 @@ Row {
                 return out;
             }
             readonly property bool hasApps: clients.length > 0
+            readonly property var hyprWs: {
+                const list = Hyprland.workspaces ? Hyprland.workspaces.values : [];
+                for (let i = 0; i < list.length; i++) {
+                    if (list[i] && list[i].id === wsId) return list[i];
+                }
+                return null;
+            }
+            readonly property bool isUrgent: !!(hyprWs && hyprWs.urgent && !isActive)
 
             implicitHeight: 26
             implicitWidth: pill.implicitWidth
@@ -42,11 +50,21 @@ Row {
                 height: 26
                 radius: Config.rPill
                 implicitWidth: Math.max(26, row.implicitWidth + 14)
-                color: ws.isActive ? Config.wsActive
+                color: ws.isUrgent ? blink.color
+                     : ws.isActive ? Config.wsActive
                      : ws.hasApps  ? Config.wsHasApps
                      : "transparent"
-                Behavior on color { ColorAnimation { duration: Config.easeMed } }
+                Behavior on color { ColorAnimation { duration: ws.isUrgent ? 0 : Config.easeMed } }
                 Behavior on implicitWidth { NumberAnimation { duration: 0; easing.type: Easing.OutCubic } }
+
+                SequentialAnimation {
+                    id: blink
+                    property color color: "transparent"
+                    running: ws.isUrgent
+                    loops: Animation.Infinite
+                    ColorAnimation { target: blink; property: "color"; to: Config.wsUrgent; duration: 600 }
+                    ColorAnimation { target: blink; property: "color"; to: "transparent"; duration: 600 }
+                }
 
                 Row {
                     id: row
