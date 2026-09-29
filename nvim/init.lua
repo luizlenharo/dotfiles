@@ -37,6 +37,7 @@ require('lazy').setup {
   require 'plugins.lazygit',
   require 'plugins.floaterm',
   require 'plugins.claudecode',
+  require 'plugins.vimtex',
 }
 
 -- The line beneath this is called `modeline`. See `:help modeline`

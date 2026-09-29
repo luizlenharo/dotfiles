@@ -16,8 +16,8 @@ PanelWindow {
 
     color: "transparent"
     anchors { top: true; left: true; right: true }
-    margins.top: 14
-    exclusiveZone: 56    // pill (42px) + 14px top margin
+    margins.top: 8
+    exclusiveZone: 50    // pill (42px) + 8px top margin
     focusable: false
     aboveWindows: false
 
