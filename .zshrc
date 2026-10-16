@@ -1,84 +1,83 @@
-# Performance optimizations
-DISABLE_AUTO_UPDATE="true"
-DISABLE_MAGIC_FUNCTIONS="true"
-DISABLE_COMPFIX="true"
+# Created by newuser for 5.9
+export PATH="$HOME/.local/bin:$PATH"
 
-# export PATH="/home/llenharo/miniconda3/bin:$PATH"  # commented out by conda initialize
+# Default editor
+export EDITOR=nvim
+export VISUAL=nvim
 
-# Cache completions aggressively
-autoload -Uz compinit
-if [ "$(date +'%j')" != "$(stat -f '%Sm' -t '%j' ~/.zcompdump 2>/dev/null)" ]; then
-    compinit
-else
-    compinit -C
+# Run fastfetch on startup
+fastfetch
+
+### Added by Zinit's installer
+if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
+    print -P "%F{33} %F{220}Installing %F{33}ZDHARMA-CONTINUUM%F{220} Initiative Plugin Manager (%F{33}zdharma-continuum/zinit%F{220})…%f"
+    command mkdir -p "$HOME/.local/share/zinit" && command chmod g-rwX "$HOME/.local/share/zinit"
+    command git clone https://github.com/zdharma-continuum/zinit "$HOME/.local/share/zinit/zinit.git" && \
+        print -P "%F{33} %F{34}Installation successful.%f%b" || \
+        print -P "%F{160} The clone has failed.%f%b"
 fi
 
-# Oh My Zsh path
-export ZSH="$HOME/.oh-my-zsh"
+source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
 
-# Theme config - fixed syntax
-ZSH_THEME="llenharo"
+# Load a few important annexes, without Turbo
+# (this is currently required for annexes)
+zinit light-mode for \
+    zdharma-continuum/zinit-annex-as-monitor \
+    zdharma-continuum/zinit-annex-bin-gem-node \
+    zdharma-continuum/zinit-annex-patch-dl \
+    zdharma-continuum/zinit-annex-rust
 
-# Spaceship settings (fixed syntax)
-SPACESHIP_PROMPT_ASYNC=true
-SPACESHIP_PROMPT_ADD_NEWLINE=true
-SPACESHIP_CHAR_SYMBOL="⚡"
+### End of Zinit's installer chunk
 
-# Minimal spaceship sections for performance
-SPACESHIP_PROMPT_ORDER=(
-  time
-  user
-  dir
-  git
-  line_sep
-  char
-)
+# Plugins
+zinit light zsh-users/zsh-syntax-highlighting
+zinit light zsh-users/zsh-completions
+zinit light zsh-users/zsh-autosuggestions
 
-# Carefully ordered plugins (syntax highlighting must be last)
-plugins=(
-  git
-  zsh-autosuggestions
-  zsh-syntax-highlighting
-)
+# Load completions
+autoload -Uz compinit && compinit
 
-# Source Oh My Zsh
-source $ZSH/oh-my-zsh.sh
+# History 
+HISTSIZE=5000
+HISTFILE=~/.zsh_history
+SAVEHIST=$HISTSIZE
+HISTDUP=erase
+setopt appendhistory
+setopt sharehistory
+setopt hist_ignore_space
+setopt hist_ignore_all_dups
+setopt hist_save_no_dups
+setopt hist_ignore_dups
+setopt hist_find_no_dups
 
-# Autosuggest settings
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="standout"
-ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE="20"
-ZSH_AUTOSUGGEST_USE_ASYNC=1
+# Keybindings
+bindkey -e
+bindkey '^p' history-search-backward
+bindkey '^n' history-search-forward
 
-# Alias expansion function
-globalias() {
-   if [[ $LBUFFER =~ '[a-zA-Z0-9]+$' ]]; then
-       zle _expand_alias
-       zle expand-word
-   fi
-   zle self-insert
-}
-zle -N globalias
-bindkey " " globalias
-bindkey "^[[Z" magic-space
-bindkey -M isearch " " magic-space
+# Completion styling
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+zstyle ':completion:*' menu no
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
+zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
-# Lazy load SSH agent
-function _load_ssh_agent() {
-    if [ -z "$SSH_AUTH_SOCK" ]; then
-        eval "$(ssh-agent -s)" > /dev/null
-        ssh-add ~/.ssh/id_github_sign_and_auth 2>/dev/null
-    fi
-}
-autoload -U add-zsh-hook
-add-zsh-hook precmd _load_ssh_agent
+# Alias
+alias c='clear'
+alias la='ls -la --color'
+alias ls='ls --color'
+alias ..='cd ..'
+alias ff='fastfetch'
+alias lg='lazygit'
+alias t='tmux'
 
-# Path configurations
-export VOLTA_HOME="$HOME/.volta"
-PATH="$VOLTA_HOME/bin:$PATH:/home/scott/.turso"
-export PATH
+# Integrations
+eval "$(starship init zsh)"
+eval "$(fzf --zsh)"
+eval "$(zoxide init zsh)"
 
-# Source aliases last
-[ -f ~/.zsh_aliases ] && source ~/.zsh_aliases
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -95,17 +94,19 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+export GI_TYPELIB_PATH="/usr/local/lib64/girepository-1.0:$GI_TYPELIB_PATH"
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# Yazi 
+# wrapper to change directory after execution if needed
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	command yazi "$@" --cwd-file="$tmp"
+	IFS= read -r -d '' cwd < "$tmp"
+	[ "$cwd" != "$PWD" ] && [ -d "$cwd" ] && builtin cd -- "$cwd"
+	rm -f -- "$tmp"
+}
 
-# Coder (miniconda - base)
-export PATH="/home/llenharo/miniconda3/bin:$PATH"
-
-# Alias
-alias nv="nvim ."
-
-# JAVA_HOME
-export JAVA_HOME="/usr/lib/jvm/java-21-openjdk-amd64"
-export PATH=$JAVA_HOME/bin:$PATH
+# cc: command with copy to clipboard
+function cc() {                                                                             
+    { print -r -- "$ $*"; "$@" 2>&1 } | tee >(wl-copy)                               
+  }    
