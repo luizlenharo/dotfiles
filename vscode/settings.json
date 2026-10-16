@@ -1,0 +1,10 @@
+{
+    "window.autoDetectColorScheme": true,
+    "workbench.preferredLightColorTheme": "Nord",
+    "claudeCode.preferredLocation": "panel",
+    "workbench.iconTheme": "vscode-icons",
+    "notebook.cellToolbarLocation": {
+        "default": "right",
+        "jupyter-notebook": "left"
+    }
+}

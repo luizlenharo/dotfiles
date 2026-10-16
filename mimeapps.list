@@ -1,0 +1,16 @@
+[Default Applications]
+text/html=google-chrome.desktop
+x-scheme-handler/http=google-chrome.desktop
+x-scheme-handler/https=google-chrome.desktop
+x-scheme-handler/about=google-chrome.desktop
+x-scheme-handler/unknown=google-chrome.desktop
+application/x-extension-burp=install4j_mthkik-BurpSuiteCommunity.desktop
+x-scheme-handler/burp=install4j_mthkik-BurpSuiteCommunity.desktop
+x-scheme-handler/claude-cli=claude-code-url-handler.desktop
+x-scheme-handler/obsidian=obsidian.desktop
+x-scheme-handler/claude=claude.desktop
+x-scheme-handler/etcher=balena-etcher-electron.desktop
+text/markdown=code.desktop
+
+[Added Associations]
+text/markdown=code.desktop;
