@@ -1,0 +1,61 @@
+{
+  "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+  "logo": {
+    "source": "~/.config/fastfetch/logo.txt",
+    "type": "file"
+  },
+  "display": {
+    "separator": " ",
+    "color": {
+      "keys": "blue",
+      "title": "blue"
+    }
+  },
+  "modules": [
+    // usuário@hostname em negrito
+    {
+      "type": "title",
+      "key": " ",
+      "format": "\u001b[1m{user-name}\u001b[0m"
+    },
+
+    // linha em branco
+    "break",
+
+    // OS
+    {
+      "type": "os",
+      "key": " "
+    },
+
+    // Shell
+    {
+      "type": "shell",
+      "key": " "
+    },
+
+    // Hyprland (via WM)
+    {
+      "type": "wm",
+      "key": " "
+    },
+
+    // CPU
+    {
+      "type": "cpu",
+      "key": "󰻠 "
+    },
+
+    // GPU
+    {
+      "type": "gpu",
+      "key": "󰍛 "
+    },
+
+    // RAM
+    {
+      "type": "memory",
+      "key": " "
+    }
+  ]
+}
